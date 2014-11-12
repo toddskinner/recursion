@@ -29,19 +29,12 @@ var stringifyJSON = function(obj) {
 	} else if(typeof(obj) === "object") {
 		var result = [];
 		Object.keys(obj).forEach(function(key){					//http://bob.yexley.net/iterating-over-javascript-objects/
-			var val = stringifyJSON(obj[key]);
-			if(val !== null) {
-				result.push('"' + key + '":' + val);
+			var val = stringifyJSON(obj[key]);					// stringify the value
+			if(val !== null) {									// exclude functions and undefined 
+				result.push(stringifyJSON(key) +":"+val);
 			}
 		})
 		return "{" + result.join(",") + "}"
 	}
 };
 			
-
-
-// 		return "\{" + _.map(obj, function(value, key){
-// 			return stringifyJSON(key) + ":" + stringifyJSON(value);
-// 		}) + "\}";
-// 	}
-// };
